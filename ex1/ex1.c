@@ -9,6 +9,24 @@
 int main(void)
 {
     // Your code here
+    int x = 100;
+    pid_t pid = fork();
+
+    if (pid < 0)
+    {
+        printf("Fork failed\n");
+        exit(1);
+    }
+    else if (pid == 0)
+    {
+        //x = 20;
+        printf("Child x-value: %d\n", x);
+    }
+    else
+    {
+        //x = 50;
+        printf("Parent x-value: %d\n", x);
+    }
 
     return 0;
 }
