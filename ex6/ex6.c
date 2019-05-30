@@ -21,6 +21,22 @@ and `clock_gettime()` should work just fine.
 int main()
 {
     // Your code here
-    
+    struct timespec start, end;
+    uint64_t diff;
+    uint64_t total;
+
+    for (int i = 0; i < number_iter; i++)
+    {
+        clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &start);
+        fprintf(stdout, "");
+        clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &end);
+
+        diff = BILLION * (end.tv_sec - start.tv_sec) + end.tv_nsec - start.tv_nsec;
+
+        total += diff;
+    }
+
+    printf("Average time to make a single system call = %llu nanoseconds\n", (total / number_iter));
+
     return 0;
 }
